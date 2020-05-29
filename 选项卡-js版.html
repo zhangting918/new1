@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding:0;
+				margin:0;
+			}
+			ul,ol{
+				list-style: none;
+			}
+			#tab{
+				width:300px;
+				height: 200px;
+				margin: 10px auto;
+				border: #008000 1px solid;
+			}
+			#tab ul{
+				height: 40px;
+			}
+			#tab ul>li{
+				float: left;
+				width:100px;
+				text-align: center;
+				line-height: 40px;
+				background-color: #D4D4D4;
+			}
+			#tab ul>li.active{
+				background-color: #FF0000;
+			}
+			
+			#tab ol{
+				width: 300px;
+				height:160px;
+			}
+			#tab ol>li{
+				width: 300px;
+				display: none;
+			}
+			#tab ol>li.current{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="tab">
+			<ul>
+				<li class="active">军事</li>
+				<li>体育</li>
+				<li>社会</li>
+			</ul>
+			<ol>
+				<li class="current">
+					十一大阅兵
+				</li>
+				<li>
+					NBA禁播
+				</li>
+				<li>
+					袁隆平获取共和国勋章
+				</li>
+			</ol>
+		</div>
+		<script>
+			//通过标签获取ul的对象
+			var ul = document.getElementsByTagName("ul")[0];
+			var uLi = ul.children;//获取ul下的所有的子元素节点
+			
+			var ol = document.getElementsByTagName("ol")[0];
+			var oLi = ol.children;//获取ol下的所有的子元素节点
+			
+			//循环ul下所有的li节点
+			for(var i=0; i<uLi.length;i++){
+				//给每一个ul下的li添加一个index属性
+				uLi[i].index = i;
+				uLi[i].onclick = function(){
+					//获取当前点击li的index的属性值
+					var ind = this.index;
+					console.log(this.innerHTML);
+					
+					//先把所有的ul的li对象的className取消
+					for(var j=0;j<uLi.length;j++){
+						uLi[j].className = "";//把所有的li的class置空
+						//把下面的ol的li内容置空
+						oLi[j].className = "";
+					}
+					//给当前的点击对象高亮显示
+					this.className = "active";
+					console.log(ind);
+					oLi[ind].className = "current";
+				}
+			}
+			
+		</script>
+	</body>
+</html>
